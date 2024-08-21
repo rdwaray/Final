@@ -12,23 +12,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # download repo
+      # Download repo
       - name: Checkout code
-      - uses: actions/checkout@v4
-      # setup java
+        uses: actions/checkout@v4
+
+      # Setup Java
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      #setup browser
+
+      # Setup Chrome
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1.7.2
 
-      # setup gradlew
-      - name: Setup gradlew
-        run: ./gradlew
+      # Make gradlew executable
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
-      # Execute gradle command for running cucumber test
+      # Execute Gradle command for running cucumber test
       - name: Execute Test
         run: ./gradlew cucumber
