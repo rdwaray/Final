@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+}
+
+group = 'APITest'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.11.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.11.0'
+
+
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.23.1'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.9.2'
+
+    testImplementation 'io.cucumber:cucumber-java:7.8.1'
+//    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.8.1'
+    testImplementation 'io.cucumber:cucumber-junit:7.8.1'
+
+}
+
+//test {
+//    useJUnitPlatform() tidak menggunakan junit5
+//
+//}
+
+//task cucumber {
+//    description = "Run Cucumber tests"
+//    dependsOn assemble, compileTestJava
+//    doLast {
+//        javaexec {
+//            main = "io.cucumber.core.cli.Main"
+//            classpath = sourceSets.test.runtimeClasspath
+//            args = [
+//                    '--plugin', 'html:reports/test-report.html',
+//                    '--plugin', 'pretty',
+//                    '--glue', 'steDdefs',
+//                    'src/test/resources/features'
+//            ]
+//        }
+//    }
+//}
