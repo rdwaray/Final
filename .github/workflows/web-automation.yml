@@ -44,9 +44,10 @@ jobs:
         uses: browser-actions/setup-chrome@v1.7.2
 
     # setup gradlew
-      - name: Setup gradlew
-        run: chmod +x scripts/gradlew
-
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Build with Gradle
+        run: ./gradlew build
     # Execute gradle command for running cucumber test
       - name: Execute Test
         run: ./gradlew cucumber
