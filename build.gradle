@@ -36,7 +36,8 @@ task cucumber {
     args = [
             '--plugin', 'html:reports/test-report.html',
             '--plugin', 'pretty',
-            '--glue', 'stepdefs',
-            'src/test/resources/features'
+            '--glue', 'Web',
+            'src/test/resources/Web'
     ]
 }
+
