@@ -29,7 +29,7 @@ dependencies {
 //
 //}
 
-task cucumber(type: JavaExec) {
+task cucumber {
     description = 'Run Cucumber tests'
     classpath = sourceSets.test.runtimeClasspath
     main = 'io.cucumber.core.cli.Main'
