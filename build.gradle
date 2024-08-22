@@ -29,19 +29,14 @@ dependencies {
 //
 //}
 
-//task cucumber {
-//    description = "Run Cucumber tests"
-//    dependsOn assemble, compileTestJava
-//    doLast {
-//        javaexec {
-//            main = "io.cucumber.core.cli.Main"
-//            classpath = sourceSets.test.runtimeClasspath
-//            args = [
-//                    '--plugin', 'html:reports/test-report.html',
-//                    '--plugin', 'pretty',
-//                    '--glue', 'steDdefs',
-//                    'src/test/resources/features'
-//            ]
-//        }
-//    }
-//}
+task cucumber(type: JavaExec) {
+    description = 'Run Cucumber tests'
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'io.cucumber.core.cli.Main'
+    args = [
+            '--plugin', 'html:reports/test-report.html',
+            '--plugin', 'pretty',
+            '--glue', 'stepdefs',
+            'src/test/resources/features'
+    ]
+}
