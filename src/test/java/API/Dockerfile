@@ -20,4 +20,4 @@ RUN ./gradlew dependencies
 COPY . /Final/
 
 # Default command to run tests
-CMD ["./gradlew", "test"]
+CMD ["./gradlew", "apiTest"]
