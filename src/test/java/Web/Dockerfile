@@ -1,5 +1,5 @@
 # Use an official OpenJDK runtime as a parent image
-FROM eclipse-temurin:17-jdk AS base
+FROM eclipse-temurin:17-jdk
 
 # Set the working directory in the container
 WORKDIR /workspace
@@ -19,6 +19,5 @@ RUN ./gradlew dependencies
 # Copy the rest of the application code
 COPY . /workspace/
 
-# Use a build argument to specify the default command
-ARG TEST_COMMAND=webTest
-CMD ["./gradlew", "${TEST_COMMAND}"]
+# Default command to run tests
+CMD ["./gradlew", "webTest"]
