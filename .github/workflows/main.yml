@@ -21,7 +21,7 @@ jobs:
 
       # Build Docker image for API
       - name: Build Docker Image for API Tests
-        run: docker build -t my-api-tests -f API/
+        run: docker build -t my-api-tests -f API/Dockerfile API/
 
       # Run Docker container and execute Gradle command for running API tests
       - name: Run API Tests in Docker
@@ -48,7 +48,8 @@ jobs:
 
       # Build Docker image for Web
       - name: Build Docker Image for Web Tests
-        run: docker build -t my-web-tests -f Web/
+        run: docker build -t my-web-tests -f Web/Dockerfile Web/
+
 
       # Run Docker container and execute Gradle command for running web tests
       - name: Run Web Tests in Docker
