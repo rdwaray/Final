@@ -14,15 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Build Docker image
       - name: Build Docker image for API tests
         run: docker build -t my-api-image .
 
-      # Run Docker container and execute API tests
       - name: Run Docker container and execute API tests
         run: docker run --rm my-api-image ./gradlew apiTest
 
-      # Upload test results as an artifact
       - name: Upload API Test Results
         uses: actions/upload-artifact@v3
         with:
@@ -35,15 +32,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Build Docker image
       - name: Build Docker image for Web tests
         run: docker build -t my-web-image .
 
-      # Run Docker container and execute Web tests
       - name: Run Docker container and execute Web tests
         run: docker run --rm my-web-image ./gradlew webTest
 
-      # Upload test results as an artifact
       - name: Upload Web Test Results
         uses: actions/upload-artifact@v3
         with:
