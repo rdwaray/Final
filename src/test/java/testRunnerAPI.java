@@ -2,7 +2,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
-public class testRunnerAPI {
+
     @RunWith(Cucumber.class)
     @CucumberOptions(
             glue = {"API"},
@@ -14,6 +14,6 @@ public class testRunnerAPI {
             }
     )
 
-public class APITestRunner {
+public class testRunnerAPI {
     }
-}
+
