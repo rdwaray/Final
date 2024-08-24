@@ -22,6 +22,17 @@ dependencies {
 //    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.8.1'
     testImplementation 'io.cucumber:cucumber-junit:7.8.1'
 
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'
+
+    testImplementation group: 'org.json', name: 'json', version: '20220924'
+    testImplementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.3.0'
+    testImplementation 'org.slf4j:slf4j-api:1.7.36'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.6'
+
+    implementation 'ch.qos.logback:logback-classic:1.4.6'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
+
+
 }
 
 //test {
@@ -29,14 +40,27 @@ dependencies {
 //
 //}
 
-task cucumber(type: JavaExec) {
+task WebTest(type: JavaExec) {
     description = 'Run Cucumber tests'
     classpath = sourceSets.test.runtimeClasspath
     main = 'io.cucumber.core.cli.Main'
     args = [
-            '--plugin', 'html:reports/test-report.html',
+            '--plugin', 'html:build/reports/cucumber',
             '--plugin', 'pretty',
             '--glue', 'Web',
             'src/test/resources/Web'
     ]
+}
+
+task APITest(type: JavaExec) {
+    description = 'Run Cucumber tests'
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'io.cucumber.core.cli.Main'
+    args = [
+            '--plugin', 'html:build/reports/cucumber',
+            '--plugin', 'pretty',
+            '--glue', 'API',
+            'src/test/resources/API'
+    ]
+
 }

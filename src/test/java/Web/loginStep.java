@@ -6,17 +6,20 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class loginStep extends baseTest {
-    @Before public void setUp(){
+public class loginStep extends baseTestWeb {
+    @Before
+    public void setUp(){
         super.setUp();
     }
-    @After public void teardown(){
+    @After
+    public void teardown(){
         super.tearDown();
     }
 
