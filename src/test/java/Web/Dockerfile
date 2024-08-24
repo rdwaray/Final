@@ -6,7 +6,7 @@ WORKDIR /Final
 
 # Copy the gradle wrapper and gradle build files
 COPY gradlew /Final/
-COPY gradle /workspace/gradle/
+COPY gradle /Final/gradle/
 COPY build.gradle /Final/
 COPY settings.gradle /Final/
 
