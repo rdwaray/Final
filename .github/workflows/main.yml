@@ -11,30 +11,15 @@ jobs:
   api-automation:
     runs-on: ubuntu-latest
     steps:
-      # Download repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup Java
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - name: Build Docker image for API tests
+        run: docker build -t my-api-image .
 
-      # Setup Chrome
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1.7.2
+      - name: Run Docker container and execute API tests
+        run: docker run --rm my-api-image ./gradlew apiTest
 
-      # Make gradlew executable
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      # Execute Gradle command for running API tests
-      - name: Execute API Tests
-        run: ./gradlew apiTest
-
-      # Upload test results as an artifact
       - name: Upload API Test Results
         uses: actions/upload-artifact@v3
         with:
@@ -44,30 +29,15 @@ jobs:
   web-automation:
     runs-on: ubuntu-latest
     steps:
-      # Download repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup Java
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - name: Build Docker image for Web tests
+        run: docker build -t my-web-image .
 
-      # Setup Chrome
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1.7.2
+      - name: Run Docker container and execute Web tests
+        run: docker run --rm my-web-image ./gradlew webTest
 
-      # Make gradlew executable
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      # Execute Gradle command for running web tests
-      - name: Execute Web Tests
-        run: ./gradlew webTest
-
-      # Upload test results as an artifact
       - name: Upload Web Test Results
         uses: actions/upload-artifact@v3
         with:
