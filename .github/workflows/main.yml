@@ -21,7 +21,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build Docker Image for API Tests
-        run: docker build -t my-api-tests -f src/test/java/API/Dockerfile .
+        run: docker build --build-arg TEST_COMMAND=apiTest -t my-api-tests -f src/test/java/API/Dockerfile .
 
       - name: Run API Tests in Docker
         run: |
@@ -47,7 +47,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build Docker Image for Web Tests
-        run: docker build -t my-web-tests -f src/test/java/Web/Dockerfile .
+        run: docker build --build-arg TEST_COMMAND=webTest -t my-web-tests -f src/test/java/Web/Dockerfile .
 
       - name: Run Web Tests in Docker
         run: |
