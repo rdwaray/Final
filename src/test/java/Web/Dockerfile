@@ -7,12 +7,3 @@ WORKDIR /workspace
 # Copy all necessary files
 COPY . /workspace/
 
-# Make gradlew executable
-RUN chmod +x gradlew
-
-# Install dependencies
-RUN ./gradlew dependencies
-
-# Use a build argument to specify the default command
-ARG TEST_COMMAND=webTest
-CMD ["./gradlew", "${TEST_COMMAND}"]
