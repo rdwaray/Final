@@ -40,7 +40,11 @@ dependencies {
 //
 //}
 
+<<<<<<< HEAD
 task WebTest(type: JavaExec) {
+=======
+task cucumberTest(type: JavaExec) {
+>>>>>>> b426227833d49b8f108632121513c901a934d3cd
     description = 'Run Cucumber tests'
     classpath = sourceSets.test.runtimeClasspath
     main = 'io.cucumber.core.cli.Main'
@@ -52,6 +56,7 @@ task WebTest(type: JavaExec) {
     ]
 }
 
+<<<<<<< HEAD
 task APITest(type: JavaExec) {
     description = 'Run Cucumber tests'
     classpath = sourceSets.test.runtimeClasspath
@@ -64,3 +69,5 @@ task APITest(type: JavaExec) {
     ]
 
 }
+=======
+>>>>>>> b426227833d49b8f108632121513c901a934d3cd
