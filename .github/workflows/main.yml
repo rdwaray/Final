@@ -19,9 +19,9 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
 
-      # Build Docker image
+      # Build Docker image for API
       - name: Build Docker Image for API Tests
-        run: docker build -t my-api-tests .
+        run: docker build -t my-api-tests -f API/Dockerfile .
 
       # Run Docker container and execute Gradle command for running API tests
       - name: Run API Tests in Docker
@@ -46,9 +46,9 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
 
-      # Build Docker image
+      # Build Docker image for Web
       - name: Build Docker Image for Web Tests
-        run: docker build -t my-web-tests .
+        run: docker build -t my-web-tests -f Web/Dockerfile .
 
       # Run Docker container and execute Gradle command for running web tests
       - name: Run Web Tests in Docker
