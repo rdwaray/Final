@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
         features = {"src/test/resources/Web"},
         plugin ={
                 "pretty",
-               "html:reports/test-report.html", "json:reports/test-report.json",
+                "html:build/test-results/webTest/test-report.html",
+                "json:build/test-results/webTest/test-report.json"
         }
 )
 

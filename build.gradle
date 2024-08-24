@@ -57,7 +57,7 @@ task webTest(type: JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
     main = 'io.cucumber.core.cli.Main'
     args = [
-            '--plugin', 'html:build/reports/cucumber',
+            '--plugin', 'html:build/results/webTest',
             '--plugin', 'pretty',
             '--glue', 'Web',
             'src/test/resources/Web'
@@ -69,7 +69,7 @@ task apiTest(type: JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
     main = 'io.cucumber.core.cli.Main'
     args = [
-            '--plugin', 'html:build/reports/cucumber',
+            '--plugin', 'html:build/results/apiTest',
             '--plugin', 'pretty',
             '--glue', 'API',
             'src/test/resources/API'
