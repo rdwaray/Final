@@ -74,10 +74,10 @@ jobs:
         with:
           name: web-test-results
           path: build/results/webTest
-          
+
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.GH_PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
           publish_dir: reports
