@@ -11,15 +11,24 @@ jobs:
   api-automation:
     runs-on: ubuntu-latest
     steps:
+      # Download repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build Docker image for API tests
-        run: docker build -t my-api-image .
+      # Setup Docker
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
 
-      - name: Run Docker container and execute API tests
-        run: docker run --rm my-api-image ./gradlew apiTest
+      # Build Docker image
+      - name: Build Docker Image for API Tests
+        run: docker build -t my-api-tests .
 
+      # Run Docker container and execute Gradle command for running API tests
+      - name: Run API Tests in Docker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace my-api-tests ./gradlew apiTest
+
+      # Upload test results as an artifact
       - name: Upload API Test Results
         uses: actions/upload-artifact@v3
         with:
@@ -29,15 +38,24 @@ jobs:
   web-automation:
     runs-on: ubuntu-latest
     steps:
+      # Download repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build Docker image for Web tests
-        run: docker build -t my-web-image .
+      # Setup Docker
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
 
-      - name: Run Docker container and execute Web tests
-        run: docker run --rm my-web-image ./gradlew webTest
+      # Build Docker image
+      - name: Build Docker Image for Web Tests
+        run: docker build -t my-web-tests .
 
+      # Run Docker container and execute Gradle command for running web tests
+      - name: Run Web Tests in Docker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace my-web-tests ./gradlew webTest
+
+      # Upload test results as an artifact
       - name: Upload Web Test Results
         uses: actions/upload-artifact@v3
         with:
