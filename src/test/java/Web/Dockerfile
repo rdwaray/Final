@@ -1,23 +1,23 @@
-# Use an official OpenJDK runtime as a parent image
+# Menggunakan image OpenJDK 17 sebagai base image
 FROM eclipse-temurin:17-jdk
 
-# Set the working directory in the container
+# Menetapkan direktori kerja di dalam container
 WORKDIR /workspace
 
-# Copy the gradle wrapper and gradle build files
+# Menyalin file Gradle yang diperlukan
 COPY gradlew /workspace/
 COPY gradle /workspace/gradle/
 COPY build.gradle /workspace/
 COPY settings.gradle /workspace/
 
-# Make gradlew executable
+# Membuat gradlew executable
 RUN chmod +x gradlew
 
-# Install dependencies
-RUN ./gradlew dependencies
-
-# Copy the rest of the application code
+# Menyalin sisa kode aplikasi ke dalam container
 COPY . /workspace/
 
-# Default command to run tests
+# Menginstal dependensi Gradle
+RUN ./gradlew dependencies
+
+# Perintah default untuk menjalankan pengujian API
 CMD ["./gradlew", "webTest"]
