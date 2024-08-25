@@ -13,11 +13,18 @@ RUN ls -la /workspace
 # Membuat gradlew executable
 RUN chmod +x gradlew
 
-# Memeriksa file gradlew untuk debugging
-RUN ls -la gradlew
-
 # Menginstal dependensi Gradle
 RUN ./gradlew dependencies --no-daemon
+
+# Menginstal QEMU dan dependensi lainnya
+RUN apt-get update && apt-get install -y \
+    qemu \
+    qemu-system-x86 \
+    qemu-utils
+
+# Contoh menjalankan emulator QEMU
+# (Anda mungkin memerlukan konfigurasi tambahan tergantung pada sistem operasi dan file image yang digunakan)
+# RUN qemu-system-x86_64 -drive file=my-image.qcow2,format=qcow2
 
 # Menginstal dependensi Gradle (jika diperlukan) dan menjalankan tes
 RUN ./gradlew --no-daemon test
