@@ -14,7 +14,7 @@ File konfigurasi workflow GitHub Actions berada di `.github/workflows/main.yml`
 ![Screenshot](https://github.com/rdwaray/Final/blob/main/Screenshoot/1.png)
 4. **Setelah pengujian selesai maka hasil report artifactnya bisa di cek**
    ![Screenshot](https://github.com/rdwaray/Final/blob/main/Screenshoot/2.png)
-5. **Hasil Pengujian**
+5. **Hasil**
 ![Screenshot](https://github.com/rdwaray/Final/blob/main/Screenshoot/3.png)
 
 
