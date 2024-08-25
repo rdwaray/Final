@@ -38,7 +38,10 @@ RUN apt-get update && \
 WORKDIR /workspace
 
 # Menyalin seluruh kode aplikasi ke dalam container
-COPY . /workspace/
+COPY ../gradlew /workspace/
+COPY ../gradle /workspace/gradle/
+COPY ../build.gradle /workspace/
+COPY ../settings.gradle /workspace/
 
 # Membuat gradlew executable
 RUN chmod +x ./gradlew
