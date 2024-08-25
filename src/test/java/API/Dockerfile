@@ -1,23 +1,58 @@
-# Use an official OpenJDK runtime as a parent image
-FROM eclipse-temurin:17-jdk
+# Menggunakan image dasar Ubuntu
+FROM ubuntu:20.04
 
-# Set the working directory in the container
+# Menetapkan variabel lingkungan untuk non-interaktif
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Menginstal dependensi dasar dan mengupdate daftar paket
+RUN apt-get update && \
+    apt-get install -y \
+    wget \
+    gnupg \
+    unzip \
+    openjdk-17-jdk \
+    libx11-dev \
+    libxkbcommon-x11-0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    libxtst6 \
+    libnss3 \
+    libgbm1 \
+    libatspi2.0-0 \
+    libgdk-pixbuf2.0-0 \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Menambahkan kunci GPG untuk repositori Google
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+
+# Menginstal Google Chrome
+RUN apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Menetapkan direktori kerja di dalam container
 WORKDIR /workspace
 
-# Copy the gradle wrapper and gradle build files
-COPY gradlew /workspace/
-COPY gradle /workspace/gradle/
-COPY build.gradle /workspace/
-COPY settings.gradle /workspace/
+# Menyalin seluruh kode aplikasi ke dalam container
+COPY ../gradlew /workspace/
+COPY ../gradle /workspace/gradle/
+COPY ../build.gradle /workspace/
+COPY ../settings.gradle /workspace/
 
-# Make gradlew executable
-RUN chmod +x gradlew
+# Membuat gradlew executable
+RUN chmod +x ./gradlew
 
-# Install dependencies
-RUN ./gradlew dependencies
+# Menginstal dependensi Gradle dan menjalankan tes
+RUN ./gradlew dependencies && \
+    ./gradlew --no-daemon test
 
-# Copy the rest of the application code
-COPY . /workspace/
+# Menentukan perintah default untuk menjalankan pengujian
+CMD ["./gradlew", "apiTest"]
 
-# Default command to run tests
-CMD ["./gradlew", "test"]
+# Menambahkan metadata image
+LABEL maintainer="your-email@example.com" \
+      description="Docker image for running Gradle tests with Google Chrome"
