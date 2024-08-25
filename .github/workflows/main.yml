@@ -8,69 +8,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  api-automation:
+  docker-tests:
     runs-on: ubuntu-latest
     steps:
       # Download repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup Java
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      # Setup Chrome
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1.7.2
+      # Build Docker image
+      - name: Build Docker image
+        run: docker build -t my-app-image:latest .
 
-      # Make gradlew executable
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      # Run tests in Docker container
+      - name: Run API Tests
+        run: |
+          docker run --rm my-app-image:latest ./gradlew apiTest
+          
+      - name: Run Web Tests
+        run: |
+          docker run --rm my-app-image:latest ./gradlew webTest
 
-      # Execute Gradle command for running API tests
-      - name: Execute API Tests
-        run: ./gradlew apiTest
-
-      # Upload test results as an artifact
-      - name: Upload API Test Results
+      # Optionally, you can upload test results if needed
+      - name: Upload Test Results
         uses: actions/upload-artifact@v3
         with:
-          name: api-test-results
-          path: build/results/apiTest
-
-  web-automation:
-    runs-on: ubuntu-latest
-    needs: api-automation
-    steps:
-      # Download repo
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Setup Java
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      # Setup Chrome
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1.7.2
-
-      # Make gradlew executable
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      # Execute Gradle command for running web tests
-      - name: Execute Web Tests
-        run: ./gradlew webTest
-
-      # Upload test results as an artifact
-      - name: Upload Web Test Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: web-test-results
-          path: build/results/webTest
+          name: test-results
+          path: build/reports
