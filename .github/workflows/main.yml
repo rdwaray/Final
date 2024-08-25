@@ -21,11 +21,11 @@ jobs:
 
       # Build Docker image for Web
       - name: Build Docker image for Web
-        run: docker build -f src/test/java/Web/Dockerfile -t my-app-web:latest src/test/java/Web
+        run: docker build -f src/test/java/Web/ -t my-app-web:latest src/test/java/Web
 
       # Build Docker image for API
       - name: Build Docker image for API
-        run: docker build -f src/test/java/API/Dockerfile -t my-app-api:latest src/test/java/API
+        run: docker build -f src/test/java/API/ -t my-app-api:latest src/test/java/API
 
       # Run tests in Docker container for Web
       - name: Run Web Tests
