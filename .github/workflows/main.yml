@@ -8,38 +8,69 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker-tests:
+  api-automation:
     runs-on: ubuntu-latest
     steps:
       # Download repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Docker Buildx
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      # Setup Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-      # Build Docker image for Web
-      - name: Build Docker image for Web
-        run: docker build -f src/test/java/Web/Dockerfile -t my-app-web:latest src/test/java/Web
+      # Setup Chrome
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1.7.2
 
-      # Build Docker image for API
-      - name: Build Docker image for API
-        run: docker build -f src/test/java/API/Dockerfile -t my-app-api:latest src/test/java/API
+      # Make gradlew executable
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
-      # Run tests in Docker container for Web
-      - name: Run Web Tests
-        run: |
-          docker run --rm my-app-web:latest ./gradlew webTest
+      # Execute Gradle command for running API tests
+      - name: Execute API Tests
+        run: ./gradlew apiTest
 
-      # Run tests in Docker container for API
-      - name: Run API Tests
-        run: |
-          docker run --rm my-app-api:latest ./gradlew apiTest
-
-      # Optionally, you can upload test results if needed
-      - name: Upload Test Results
+      # Upload test results as an artifact
+      - name: Upload API Test Results
         uses: actions/upload-artifact@v3
         with:
-          name: test-results
-          path: build/reports
+          name: api-test-results
+          path: build/results/apiTest
+
+  web-automation:
+    runs-on: ubuntu-latest
+    needs: api-automation
+    steps:
+      # Download repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Setup Chrome
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1.7.2
+
+      # Make gradlew executable
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # Execute Gradle command for running web tests
+      - name: Execute Web Tests
+        run: ./gradlew webTest
+
+      # Upload test results as an artifact
+      - name: Upload Web Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: web-test-results
+          path: build/results/webTest
