@@ -55,4 +55,3 @@ CMD ["./gradlew", "apiTest"]
 
 # Menambahkan metadata image
 LABEL maintainer="your-email@example.com" \
-      description="Docker image for running Gradle tests with Google Chrome"
