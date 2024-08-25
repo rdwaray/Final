@@ -19,18 +19,23 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Build Docker image
-      - name: Build Docker image
-        run: docker build -t my-app-image:latest .
+      # Build Docker image for Web
+      - name: Build Docker image for Web
+        run: docker build -f src/test/java/Web/Dockerfile -t my-app-web:latest src/test/java/Web
 
-      # Run tests in Docker container
-      - name: Run API Tests
-        run: |
-          docker run --rm my-app-image:latest ./gradlew apiTest
-          
+      # Build Docker image for API
+      - name: Build Docker image for API
+        run: docker build -f src/test/java/API/Dockerfile -t my-app-api:latest src/test/java/API
+
+      # Run tests in Docker container for Web
       - name: Run Web Tests
         run: |
-          docker run --rm my-app-image:latest ./gradlew webTest
+          docker run --rm my-app-web:latest ./gradlew webTest
+
+      # Run tests in Docker container for API
+      - name: Run API Tests
+        run: |
+          docker run --rm my-app-api:latest ./gradlew apiTest
 
       # Optionally, you can upload test results if needed
       - name: Upload Test Results
