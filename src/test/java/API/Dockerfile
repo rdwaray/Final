@@ -7,12 +7,20 @@ WORKDIR /workspace
 # Menyalin seluruh kode aplikasi dan file Gradle ke dalam container
 COPY . /workspace/
 
-# Membuat gradlew executable dan menginstal dependensi Gradle
-RUN chmod +x gradlew && \
-    ./gradlew dependencies
+# Memeriksa isi direktori untuk debugging
+RUN ls -la /workspace
 
-# Menginstal dependensi Gradle (jika diperlukan)
-RUN ./gradlew --no-daemon assemble
+# Membuat gradlew executable
+RUN chmod +x gradlew
+
+# Memeriksa file gradlew untuk debugging
+RUN ls -la gradlew
+
+# Menginstal dependensi Gradle
+RUN ./gradlew dependencies --no-daemon
+
+# Menginstal dependensi Gradle (jika diperlukan) dan menjalankan tes
+RUN ./gradlew --no-daemon test
 
 # Perintah default untuk menjalankan pengujian API
 CMD ["./gradlew", "apiTest"]
