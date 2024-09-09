@@ -8,23 +8,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-
 public class baseTestWeb {
 
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    private static WebDriver driver;
+    private static WebDriverWait wait;
 
-    public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
+            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        }
+        return driver;
     }
 
-    public void tearDown(){
-        if (driver != null){
+    public static WebDriverWait getWait() {
+        return wait;
+    }
+
+    public static void quitDriver() {
+        if (driver != null) {
             driver.quit();
+            driver = null;
+            wait = null;
+//            driver.quit();
+
         }
     }
 }

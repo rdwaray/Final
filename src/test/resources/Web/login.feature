@@ -1,6 +1,6 @@
 @Login
-@Valid-login
 Feature: Login
+  @Valid-login
   Scenario: Successful login
     Given User in on login form
     And User input correct username with "standard_user"
