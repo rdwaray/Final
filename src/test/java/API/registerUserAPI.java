@@ -39,13 +39,14 @@ public class registerUserAPI extends baseTestAPI {
     public void theResponseRegisterCodeShouldBe(int statusCode) {
         assertEquals(statusCode, response.getStatusCode());
         System.out.println("Status Code: " + response.statusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
     }
-
-    @Then("the response should contain the newly created user ID")
-    public void theResponseShouldContainTheNewlyCreatedUserID() {
-        String userId = response.jsonPath().getString("user_id");
-        System.out.println("User ID: " + userId);
-    }
+//
+//    @Then("the response should contain the newly created user ID")
+//    public void theResponseShouldContainTheNewlyCreatedUserID() {
+//        String userId = response.jsonPath().getString("user_id");
+//        System.out.println("User ID: " + userId);
+//    }
 
     @And("the response should be validated")
     public void theResponseShouldBeValidated() {

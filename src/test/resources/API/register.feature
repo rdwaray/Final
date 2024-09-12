@@ -6,7 +6,7 @@ Feature: User Registration
     Given I provide a valid email "jeve.ss@holtreqres.in" and a valid password "pi23stol"
     When  I submit the registration request
     And the response register code should be 201
-    Then the response should contain the newly created user ID
+#    Then the response should contain the newly created user ID
     And the response should be validated
     And the response JSON should match the schema "register.json"
 

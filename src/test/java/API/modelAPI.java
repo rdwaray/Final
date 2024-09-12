@@ -6,8 +6,6 @@ import io.restassured.response.Response;
 public class modelAPI {
 
     private static final String BASE_URL = "https://reqres.in/api";
-    private static final String AUTH_TOKEN = "QpwL5tke4Pnpja7X4"; // Example token
-
 
     public Response getUser(int userId) {
         return RestAssured
@@ -70,8 +68,8 @@ public class modelAPI {
                 .baseUri(BASE_URL)
                 .basePath("/api/register")
                 .header("Content-Type","application/json")
-                .header("Authorization", "Bearer " + AUTH_TOKEN) // Add token here
                 .body("{ \"email\": \"" + email + "\", \"password\": \"" + password + "\" }")
+                .when()
                 .post();
     }
 
@@ -80,7 +78,7 @@ public class modelAPI {
                 .given()
                 .baseUri(BASE_URL)
                 .basePath("/api/login")
-                .header("Authorization", "Bearer " + AUTH_TOKEN) // Add token here
+                .header("Content-Type","application/json")
                 .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
                 .when()
                 .post();

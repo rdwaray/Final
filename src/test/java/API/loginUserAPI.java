@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,12 +44,13 @@ public class loginUserAPI extends baseTestAPI {
     public void theResponseLoginCodeShouldBe(int statusCode) {
         assertEquals(statusCode, response.getStatusCode());
         System.out.println("Status Code: " + response.statusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
     }
 
     @And("the response login should be validated")
     public void theResponseLoginShouldBeValidated() {
-//        Assert.assertEquals(email, response.jsonPath().getString("email"));
-//        Assert.assertEquals(password, response.jsonPath().getString("password"));
+       Assert.assertEquals(email, response.jsonPath().getString("email"));
+        Assert.assertEquals(password, response.jsonPath().getString("password"));
 
         System.out.println("Full Response Body: " + response.getBody().asString());
 
@@ -110,10 +112,10 @@ public class loginUserAPI extends baseTestAPI {
         System.out.println("Error message for missing email: " + errorMessage);
     }
 
-    @Then("the response should contain the  user ID")
-    public void theResponseShouldContainTheUserID() {
-        String userId = response.jsonPath().getString("user_id");
-        System.out.println("User ID: " + userId);
-    }
+//    @Then("the response should contain the  user ID")
+//    public void theResponseShouldContainTheUserID() {
+//        String userId = response.jsonPath().getString("user_id");
+//        System.out.println("User ID: " + userId);
+//    }
 
 }
