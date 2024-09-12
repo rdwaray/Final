@@ -76,11 +76,10 @@ public class modelAPI {
     public Response loginUser(String email, String password) {
         return RestAssured
                 .given()
-                .baseUri(BASE_URL)
-                .basePath("/api/login")
                 .header("Content-Type","application/json")
+                .header("Accept","application/json")
                 .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
                 .when()
-                .post();
+                .post(BASE_URL+"/login");
     }
 }
