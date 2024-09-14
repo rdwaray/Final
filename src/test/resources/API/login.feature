@@ -6,7 +6,12 @@ Feature: User Login
     Given I provide login data a valid email "eve.holt@reqres.in" and a valid password "cityslicka"
     When  I submit the login request
     And the response login code should be 200
+<<<<<<< HEAD
     And the response login JSON should match the schema "login.json"
+=======
+#    And the response login should be validated
+#    And the response login JSON should match the schema "login.json"
+>>>>>>> 35eb27fb405b36dc1a3b60e0dffc4803ad76b21e
 
   @MissingPassword-Login
   Scenario: Attempt to login with a missing password
