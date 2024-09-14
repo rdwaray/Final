@@ -2,15 +2,11 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "id": {
+    "token": {
       "type": "string",
-      "description": "A unique identifier for the resource."
-    },
-    "createdAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "The date and time when the resource was created."
+      "description": "A unique token string."
     }
   },
-  "required": ["id", "createdAt"]
+  "required": ["token"],
+  "additionalProperties": false
 }

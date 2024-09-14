@@ -21,7 +21,7 @@ public class loginUserAPI extends baseTestAPI {
 
     private Response response;
     private final String loginsuccessSchemaPath = "src/test/resources/API/JsonSchema/login.json";
-    private final String loginerrorSchemaPath  = "src/test/resources/API/JsonSchema/login.json";
+    private final String loginerrorSchemaPath  = "src/test/resources/API/JsonSchema/errorLogin.json";
     private String email;
     private String password;
     private final modelAPI modelAPI = new modelAPI();
@@ -47,21 +47,6 @@ public class loginUserAPI extends baseTestAPI {
         System.out.println("Response Body: " + response.getBody().asString());
     }
 
-    @And("the response login should be validated")
-    public void theResponseLoginShouldBeValidated() {
-       Assert.assertEquals(email, response.jsonPath().getString("email"));
-        Assert.assertEquals(password, response.jsonPath().getString("password"));
-
-        System.out.println("Full Response Body: " + response.getBody().asString());
-
-
-        System.out.println("Extracted email: " + response.jsonPath().getString("email"));
-        System.out.println("Extracted password: " + response.jsonPath().getString("password"));
-
-
-        System.out.println(" login with email: " + email + " and password: " + password);
-    }
-
     @And("the response login JSON should match the schema {string}")
     public void theResponseLoginJSONShouldMatchTheSchema(String arg0) {
 //        String responseBody = response.getBody().asString();
@@ -85,7 +70,7 @@ public class loginUserAPI extends baseTestAPI {
     @Then("the response login should contain an error message about the missing password")
     public void theResponseLoginShouldContainAnErrorMessageAboutTheMissingPassword() {
         String errorMessage = response.jsonPath().getString("error");
-        Assert.assertEquals(null, errorMessage);
+        Assert.assertEquals("Missing password", errorMessage);
         System.out.println("Error message for missing password: " + errorMessage);
     }
 
@@ -96,6 +81,7 @@ public class loginUserAPI extends baseTestAPI {
 
         response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(new File(loginerrorSchemaPath)));
         System.out.println("Schema validation completed.");
+
     }
 
     @Given("I provide login data an  empty email and a valid password {string}")
@@ -108,7 +94,7 @@ public class loginUserAPI extends baseTestAPI {
     @Then("the response login should contain an error message about the missing email")
     public void theResponseLoginShouldContainAnErrorMessageAboutTheMissingEmail() {
         String errorMessage = response.jsonPath().getString("error");
-        Assert.assertEquals(null, errorMessage);
+        Assert.assertEquals("Missing email or username", errorMessage);
         System.out.println("Error message for missing email: " + errorMessage);
     }
 

@@ -48,13 +48,13 @@ public class registerUserAPI extends baseTestAPI {
 //        System.out.println("User ID: " + userId);
 //    }
 
-    @And("the response should be validated")
-    public void theResponseShouldBeValidated() {
-        Assert.assertEquals(email, response.jsonPath().getString("email"));
-        Assert.assertEquals(password, response.jsonPath().getString("password"));
-
-        System.out.println(" created with email: " + email + " and password: " + password);
-    }
+//    @And("the response should be validated")
+//    public void theResponseShouldBeValidated() {
+//        Assert.assertEquals(email, response.jsonPath().getString("email"));
+//        Assert.assertEquals(password, response.jsonPath().getString("password"));
+//
+//        System.out.println(" created with email: " + email + " and password: " + password);
+//    }
 
     @And("the response JSON should match the schema {string}")
     public void theResponseJSONShouldMatchTheSchema(String schemaType) {
@@ -94,7 +94,7 @@ public class registerUserAPI extends baseTestAPI {
     @Then("the response should contain an error message about the missing password")
     public void theResponseShouldContainAnErrorMessageAboutTheMissingPassword() {
         String errorMessage = response.jsonPath().getString("error");
-        Assert.assertEquals(null, errorMessage);
+        Assert.assertEquals("Missing password", errorMessage);
         System.out.println("Error message for missing password: " + errorMessage);
     }
 

@@ -2,20 +2,15 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "email": {
-      "type": "string",
-      "format": "email"
-    },
-    "password": {
-      "type": "string"
-    },
     "id": {
-      "type": "string"
+      "type": "integer",
+      "description": "A unique identifier."
     },
-    "createdAt": {
+    "token": {
       "type": "string",
-      "format": "date-time"
+      "description": "A unique token string."
     }
   },
-  "required": ["email", "password", "id", "createdAt"]
+  "required": ["id", "token"],
+  "additionalProperties": false
 }

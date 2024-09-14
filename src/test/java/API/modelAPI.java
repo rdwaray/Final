@@ -65,22 +65,20 @@ public class modelAPI {
     public Response register(String email, String password) {
         return RestAssured
                 .given()
-                .baseUri(BASE_URL)
-                .basePath("/api/register")
                 .header("Content-Type","application/json")
-                .body("{ \"email\": \"" + email + "\", \"password\": \"" + password + "\" }")
+                .header("Accept","application/json")
+                .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
                 .when()
-                .post();
+                .post(BASE_URL+"/register");
     }
 
     public Response loginUser(String email, String password) {
         return RestAssured
                 .given()
-                .baseUri(BASE_URL)
-                .basePath("/api/login")
                 .header("Content-Type","application/json")
+                .header("Accept","application/json")
                 .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}")
                 .when()
-                .post();
+                .post(BASE_URL+"/login");
     }
 }
