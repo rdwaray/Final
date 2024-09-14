@@ -17,8 +17,8 @@ Repository ini berisi framework uji otomatis untuk Web UI dan API, dibangun deng
 - **Java**: Bahasa pemrograman yang digunakan untuk implementasi uji.
 - **Gradle**: Alat otomatisasi build yang digunakan untuk mengelola dependensi dan tugas.
 - **Cucumber**: Digunakan untuk menulis tes dalam format Gherkin dan menjalankannya.
-- **RestAssured**: Perpustakaan untuk pengujian API.
-- **Selenium**: Perpustakaan uji Web UI.
+- **RestAssured**: Library untuk pengujian API.
+- **Selenium**: Library uji Web UI.
 - **JUnit**: Kerangka uji yang digunakan bersama Cucumber.
 - **Cucumber Report Plugin**: Untuk menghasilkan laporan dalam format HTML dan JSON.
 
