@@ -1,6 +1,5 @@
 # Final Project
-Repository ini berisi framework uji otomatis yang mendukung pengujian Web UI dan API. Framework ini dibangun menggunakan Java, Gradle, Cucumber, dan alat-alat lainnya, yang terorganisir untuk memfasilitasi pengujian kedua jenis aplikasi tersebut.
-
+Repository ini berisi framework uji otomatis untuk Web UI dan API, dibangun dengan Java, Gradle, dan Cucumber, serta alat-alat terkait.
 ##Struktur Folder
 - **src/test/java/**:
     - **API**: Berisi kode uji API, termasuk definisi langkah dan file fitur.
@@ -11,8 +10,8 @@ Repository ini berisi framework uji otomatis yang mendukung pengujian Web UI dan
 - **build.gradle**: File build Gradle untuk mengelola dependensi dan tugas.
 - **.github/workflows**: Konfigurasi workflow GitHub Actions.
 - **src/test/java**:
-  - **testRunnerAPI**:
-  - **testRunnerWeb**:
+  - **testRunnerAPI**: kelas dalam framework uji otomatis API yang digunakan untuk menjalankan pengujian.
+  - **testRunnerWeb**: kelas dalam framework uji otomatis API yang digunakan untuk menjalankan pengujian.
 
 ## Tools dan library
 - **Java**: Bahasa pemrograman yang digunakan untuk implementasi uji.
@@ -34,4 +33,4 @@ Repository ini berisi framework uji otomatis yang mendukung pengujian Web UI dan
 - Gunakan =  ./gradlew WebTest
 
 ## Github Workflow
-Workflow GitHub Actions didefinisikan di direktori .github/workflows. Workflow ini diatur untuk menjalankan tes pada pemicu manual dan permintaan tarik untuk memastikan bahwa tes dijalankan dalam berbagai skenario.
+Workflow GitHub Actions, yang didefinisikan di .github/workflows, menjalankan tes secara manual dan saat ada permintaan tarik untuk memastikan berbagai skenario diuji.
